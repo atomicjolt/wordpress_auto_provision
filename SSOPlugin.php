@@ -41,7 +41,7 @@ function sso_login()
   }
   else
   {
-    echo("Failed login (even with autoprosioning)")
+    echo("Failed login (even with autoprosioning)");
   }
 }
 add_action( 'login_header', 'sso_login' );
