@@ -18,7 +18,7 @@ function sso_logout(){
 
 function sso_login()
 {  $email_address = explode("/",$_SERVER['REMOTE_USER'])[0];
-   $user_number = explode("@" $email_address)[0];
+   $user_number = explode("@", $email_address)[0];
    if ($email_address == '')
   {
     echo("Did not obtain user info from SSO server");
