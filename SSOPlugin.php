@@ -44,5 +44,14 @@ function sso_login()
     echo("Failed login (even with autoprosioning)");
   }
 }
+
+function redirectUnauthenticated()
+{
+    if ($_SERVER['REMOTE_USER'] == ''){
+        wp_redirect( 'wordpress.openlmshost.com/login');
+	exit;
+     }
+}
+add_action('wp_head', redirectUnauthenticated);
 add_action( 'login_header', 'sso_login' );
 ?>
