@@ -29,20 +29,24 @@ function sso_login()
     //User hasn't been created yet, auto provision one
     $password = wp_generate_password( 12, true );
     $user_id = wpmu_create_user( $user_number, $password, $email_address );
-    //wp_update_user(
-    //array(
-    //  'ID'       => $user_id,
-    //  'nickname' => $email_address
-    //));
+/*
+    wp_update_user(
+    array(
+      'ID'       => $user_id,
+      'nickname' => $email_address
+    ));
+*/
     // autoprovisioned as contributers (this can change if needed)
     // $user = new WP_User( $user_id );
     //$user->set_role( 'contributor' );
-    wpmu_create_blog( $user_number, '', '', $user_id , array( 'public' => 1 ), $current_site->id );
+    $subdomain = $user_number+'wordpress.openlmshost.com';
+     wpmu_create_blog( $subdomain, '/', 'Title', $user_id , array( 'public' => 1 ), 1 );
   }
-  $user = get_user_by('login', $email_address);
+  $user = get_user_by('email', $email_address);
   // Redirect URL //
   if ( !is_wp_error( $user ) )
   {
+    echo('User Found');
     wp_clear_auth_cookie();
     wp_set_current_user ( $user->ID );
     wp_set_auth_cookie  ( $user->ID );
