@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: SSO wordpress plugin
+Plugin Name: Autoprovision and login wordpress plugin
 
 This plugin assumes that you have already set up and configured mod_auth_openidc
 and that you're login page is at a location protected by that plugin. This also
@@ -66,6 +66,6 @@ function sso_login()
   }
 }
 
-//add_action( 'init', 'sso_login', 1 );
+add_action( 'init', 'sso_login', 1 );
 add_action('wp_logout','sso_logout');
 ?>
