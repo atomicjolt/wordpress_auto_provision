@@ -8,14 +8,16 @@ autoprovisions accounts when needed.
 */
 defined('ABSPATH') or die("No script kiddies please!");
 
-function sso_logout() {
+function sso_logout()
+{
     $url = 'https://wordpress.openlmshost.com/wp-admin?logout=https%3A%2F%2Fwordpress.openlmshost.com%2Floggedout.html';
     wp_clear_auth_cookie();
     wp_redirect($url);
     exit();
 }
 
-function sso_login() {
+function sso_login()
+{
     //$email_address = explode("/",$_SERVER['REMOTE_USER'])[0];
     //$user_number = explode("@", $email_address)[0];
 
@@ -26,7 +28,7 @@ function sso_login() {
     if ($email_address == '') {
         echo("Did not obtain user info from SSO server");
         return;
-    } else if (null == username_exists($user_number)) {
+    } elseif (null == username_exists($user_number)) {
         //User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
