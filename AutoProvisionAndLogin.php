@@ -29,7 +29,7 @@ function sso_login()
         echo("Did not obtain user info from SSO server");
         return;
     } elseif (null == username_exists($user_number)) {
-        //User hasn't been created yet, auto provision one
+        // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
         $domain = get_home_url(1, '', null) . '/';
@@ -47,7 +47,7 @@ function sso_login()
         wp_clear_auth_cookie();
         wp_set_current_user($user->ID);
         wp_set_auth_cookie($user->ID);
-        // Redirect URL //
+        // Redirect URL
         $user_info = get_userdata($user->ID);
         if ($user_info->primary_blog) {
             $primary_url = get_blogaddress_by_id($user_info->primary_blog) . 'wp-admin/';
