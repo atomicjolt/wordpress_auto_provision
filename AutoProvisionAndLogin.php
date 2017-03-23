@@ -35,7 +35,7 @@ function sso_login()
         $domain = get_home_url(1, '', null) . '/';
         $domain = str_replace('http://', '', $domain);
         echo $domain;
-        $path = '/'.$user_number. 'blog';
+        $path = '/' . $user_number . 'blog';
         $result = wpmu_create_blog($domain, $path, 'Title', $user_id, array('public' => 1), 1);
         if (is_wp_error($result)) {
             echo $result->get_error_message();
