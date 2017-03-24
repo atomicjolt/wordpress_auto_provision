@@ -68,6 +68,7 @@ function sso_login()
 
     if ($user == false) {
         echo("Failed login (even with autoprovisioning)");
+        return;
     } else {
         clean_user_cache($user->ID);
         wp_clear_auth_cookie();
