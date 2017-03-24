@@ -50,7 +50,9 @@ function sso_login()
         return;
     }
 
-    if (null == username_exists($user_number)) {
+    $user = get_user_by('login', $user_number);
+
+    if ($user == false) {
         // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
