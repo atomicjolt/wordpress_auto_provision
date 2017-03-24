@@ -36,7 +36,9 @@ function sso_login()
     //$email_address = explode("/", $_SERVER['REMOTE_USER'])[0];
     //$user_number = explode("@", $email_address)[0];
 
-    if (is_user_logged_in()) return;
+    if (is_user_logged_in()) {
+        return;
+    }
 
     $email_address = 'testmonkey@example.com';
     $user_number = 9999;
