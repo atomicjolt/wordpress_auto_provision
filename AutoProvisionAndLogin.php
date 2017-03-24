@@ -75,6 +75,7 @@ function sso_login()
     wp_clear_auth_cookie();
     wp_set_current_user($user->ID);
     wp_set_auth_cookie($user->ID);
+
     // Redirect URL
     $user_info = get_userdata($user->ID);
     if ($user_info->primary_blog) {
