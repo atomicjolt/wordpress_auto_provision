@@ -50,7 +50,9 @@ function sso_login()
         return;
     }
 
-    if (null == username_exists($user_number)) {
+    $user = get_user_by('login', $user_number);
+
+    if ($user == false) {
         // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
@@ -62,9 +64,8 @@ function sso_login()
         if (is_wp_error($result)) {
             echo $result->get_error_message();
         }
+        $user = get_user_by('login', $user_number);
     }
-
-    $user = get_user_by('email', $email_address);
 
     if ($user == false) {
         echo("Failed login (even with autoprovisioning)");
