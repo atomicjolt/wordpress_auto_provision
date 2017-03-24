@@ -69,19 +69,19 @@ function sso_login()
     if ($user == false) {
         echo("Failed login (even with autoprovisioning)");
         return;
-    } else {
-        clean_user_cache($user->ID);
-        wp_clear_auth_cookie();
-        wp_set_current_user($user->ID);
-        wp_set_auth_cookie($user->ID);
-        // Redirect URL
-        $user_info = get_userdata($user->ID);
-        if ($user_info->primary_blog) {
-            $primary_url = get_blogaddress_by_id($user_info->primary_blog) . 'wp-admin/';
-            if ($primary_url) {
-                wp_redirect($primary_url);
-                die();
-            }
+    }
+
+    clean_user_cache($user->ID);
+    wp_clear_auth_cookie();
+    wp_set_current_user($user->ID);
+    wp_set_auth_cookie($user->ID);
+    // Redirect URL
+    $user_info = get_userdata($user->ID);
+    if ($user_info->primary_blog) {
+        $primary_url = get_blogaddress_by_id($user_info->primary_blog) . 'wp-admin/';
+        if ($primary_url) {
+            wp_redirect($primary_url);
+            die();
         }
     }
 }
