@@ -64,9 +64,8 @@ function sso_login()
         if (is_wp_error($result)) {
             echo $result->get_error_message();
         }
+        $user = get_user_by('login', $user_number);
     }
-
-    $user = get_user_by('login', $user_number);
 
     if ($user == false) {
         echo("Failed login (even with autoprovisioning)");
