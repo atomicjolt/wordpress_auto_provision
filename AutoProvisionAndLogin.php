@@ -37,10 +37,13 @@ function sso_login()
         return;
     }
 
-    //$email_address = explode("/", $_SERVER['REMOTE_USER'])[0];
-    //$user_number = explode("@", $email_address)[0];
+    /*
+    $email_address = explode("/", $_SERVER['REMOTE_USER'])[0];
+    $user_number = explode("@", $email_address)[0];
+    /*/
     $email_address = 'testmonkey@example.com';
     $user_number = 9999;
+    //*/
 
     if ($email_address == '') {
         echo("Did not obtain user info from SSO server");
