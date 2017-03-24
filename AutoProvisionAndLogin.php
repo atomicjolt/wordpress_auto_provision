@@ -56,11 +56,8 @@ function sso_login()
         // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
-        $domain = get_home_url(1, '', null) . '/';
-        $domain = str_replace('http://', '', $domain);
-        echo $domain;
         $path = '/' . $user_number . 'blog';
-        $result = wpmu_create_blog($domain, $path, 'Title', $user_id, array('public' => 1), 1);
+        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user_id, array('public' => 1), 1);
         if (is_wp_error($result)) {
             echo $result->get_error_message();
         }
