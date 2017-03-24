@@ -42,6 +42,7 @@ function sso_login()
 
     $email_address = 'testmonkey@example.com';
     $user_number = 9999;
+
     if ($email_address == '') {
         echo("Did not obtain user info from SSO server");
         return;
