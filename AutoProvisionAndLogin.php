@@ -66,7 +66,7 @@ function sso_login()
         }
     }
 
-    $user = get_user_by('email', $email_address);
+    $user = get_user_by('login', $user_number);
 
     if ($user == false) {
         echo("Failed login (even with autoprovisioning)");
