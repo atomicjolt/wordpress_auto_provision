@@ -33,13 +33,12 @@ function sso_logout()
 
 function sso_login()
 {
-    //$email_address = explode("/", $_SERVER['REMOTE_USER'])[0];
-    //$user_number = explode("@", $email_address)[0];
-
     if (is_user_logged_in()) {
         return;
     }
 
+    //$email_address = explode("/", $_SERVER['REMOTE_USER'])[0];
+    //$user_number = explode("@", $email_address)[0];
     $email_address = 'testmonkey@example.com';
     $user_number = 9999;
 
