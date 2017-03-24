@@ -66,7 +66,9 @@ function sso_login()
 
     $user = get_user_by('email', $email_address);
 
-    if ($user != false) {
+    if ($user == false) {
+        echo("Failed login (even with autoprovisioning)");
+    } else {
         clean_user_cache($user->ID);
         wp_clear_auth_cookie();
         wp_set_current_user($user->ID);
@@ -80,8 +82,6 @@ function sso_login()
                 die();
             }
         }
-    } else {
-        echo("Failed login (even with autoprovisioning)");
     }
 }
 
