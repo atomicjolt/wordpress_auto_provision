@@ -48,7 +48,9 @@ function sso_login()
     if ($email_address == '') {
         echo("Did not obtain user info from SSO server");
         return;
-    } elseif (null == username_exists($user_number)) {
+    }
+
+    if (null == username_exists($user_number)) {
         // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
