@@ -63,7 +63,9 @@ function sso_login()
             echo $result->get_error_message();
         }
     }
+
     $user = get_user_by('email', $email_address);
+
     if ($user != false) {
         clean_user_cache($user->ID);
         wp_clear_auth_cookie();
