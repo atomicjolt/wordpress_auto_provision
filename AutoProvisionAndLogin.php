@@ -28,7 +28,7 @@ function sso_logout()
     $url = 'https://wordpress.openlmshost.com/wp-admin?logout=https%3A%2F%2Fwordpress.openlmshost.com%2Floggedout.html';
     wp_clear_auth_cookie();
     wp_redirect($url);
-    exit();
+    exit;
 }
 
 function sso_login()
@@ -80,7 +80,7 @@ function sso_login()
         $primary_url = get_blogaddress_by_id($user->primary_blog) . 'wp-admin/';
         if ($primary_url) {
             wp_redirect($primary_url);
-            die();
+            exit;
         }
     }
 }
