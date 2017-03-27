@@ -73,15 +73,6 @@ function sso_login()
             wp_die("Failed to create new blog at $path for user $user_number: $msg");
         }
     }
-
-    // Redirect URL
-    if ($user->primary_blog) {
-        $primary_url = get_blogaddress_by_id($user->primary_blog) . 'wp-admin/';
-        if ($primary_url) {
-            wp_redirect($primary_url);
-            exit;
-        }
-    }
 }
 
 add_action('init', 'sso_login', 1);
