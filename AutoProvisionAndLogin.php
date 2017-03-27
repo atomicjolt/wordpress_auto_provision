@@ -1,6 +1,6 @@
 <?php
 /**
-Plugin Name: Autoprovision and login wordpress plugin
+Plugin Name: SSO Account Integration
 
 Copyright (C) 2017 Atomic Jolt
 
