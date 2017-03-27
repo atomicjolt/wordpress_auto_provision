@@ -67,7 +67,7 @@ function sso_login()
 
     if (!$user->primary_blog) {
         $path = "/$user_number";
-        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
+        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'My blog', $user->ID, array('public' => 1), 1);
         if (is_wp_error($result)) {
             $msg = $result->get_error_message();
             wp_die("Failed to create new blog at $path for user $user_number: $msg");
