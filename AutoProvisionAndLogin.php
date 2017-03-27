@@ -64,7 +64,6 @@ function sso_login()
         $user = get_user_by('login', $user_number);
     }
 
-    clean_user_cache($user->ID);
     wp_clear_auth_cookie();
     wp_set_current_user($user->ID);
     wp_set_auth_cookie($user->ID);
