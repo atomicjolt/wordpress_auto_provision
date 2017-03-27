@@ -56,23 +56,27 @@ function sso_login()
         // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
-        $path = '/' . $user_number . 'blog';
-        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user_id, array('public' => 1), 1);
-        if (is_wp_error($result)) {
-            echo $result->get_error_message();
-        }
-        $user = get_user_by('login', $user_number);
-    }
 
-    if ($user == false) {
-        echo("Failed login (even with autoprovisioning)");
-        return;
+        $user = get_user_by('login', $user_number);
+        if ($user == false) {
+            echo("Failed login (even with autoprovisioning)");
+            return;
+        }
     }
 
     clean_user_cache($user->ID);
     wp_clear_auth_cookie();
     wp_set_current_user($user->ID);
     wp_set_auth_cookie($user->ID);
+
+    $user_info = get_userdata($user->ID);
+    if (!$user_info->primary_blog) {
+        $path = '/' . $user_number . 'blog';
+        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
+        if (is_wp_error($result)) {
+            echo $result->get_error_message();
+        }
+    }
 
     // Redirect URL
     $user_info = get_userdata($user->ID);
