@@ -69,8 +69,7 @@ function sso_login()
     wp_set_current_user($user->ID);
     wp_set_auth_cookie($user->ID);
 
-    $user_info = get_userdata($user->ID);
-    if (!$user_info->primary_blog) {
+    if (!$user->primary_blog) {
         $path = '/' . $user_number . 'blog';
         $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
         if (is_wp_error($result)) {
@@ -79,9 +78,8 @@ function sso_login()
     }
 
     // Redirect URL
-    $user_info = get_userdata($user->ID);
-    if ($user_info->primary_blog) {
-        $primary_url = get_blogaddress_by_id($user_info->primary_blog) . 'wp-admin/';
+    if ($user->primary_blog) {
+        $primary_url = get_blogaddress_by_id($user->primary_blog) . 'wp-admin/';
         if ($primary_url) {
             wp_redirect($primary_url);
             die();
