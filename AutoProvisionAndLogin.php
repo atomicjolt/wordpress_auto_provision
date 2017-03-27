@@ -66,7 +66,7 @@ function sso_login()
     wp_set_auth_cookie($user->ID);
 
     if (!$user->primary_blog) {
-        $path = '/' . $user_number . 'blog';
+        $path = "/$user_number";
         $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
         if (is_wp_error($result)) {
             $msg = $result->get_error_message();
