@@ -46,8 +46,7 @@ function sso_login()
     //*/
 
     if ($email_address == '') {
-        echo("Did not obtain user info from SSO server");
-        return;
+        wp_die('Did not obtain user info from SSO server');
     }
 
     $user = get_user_by('login', $user_number);
@@ -57,8 +56,7 @@ function sso_login()
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
         if ($user_id == false) {
-            echo("Failed login (even with autoprovisioning)");
-            return;
+            wp_die("Failed to create new user $user_number/$email_address");
         }
 
         $user = get_user_by('login', $user_number);
@@ -72,7 +70,8 @@ function sso_login()
         $path = '/' . $user_number . 'blog';
         $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
         if (is_wp_error($result)) {
-            echo $result->get_error_message();
+            $msg = $result->get_error_message();
+            wp_die("Failed to create new blog at $path for user $user_number: $msg");
         }
     }
 
