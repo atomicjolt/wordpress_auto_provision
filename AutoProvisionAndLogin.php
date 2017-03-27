@@ -62,11 +62,10 @@ function sso_login()
             echo $result->get_error_message();
         }
         $user = get_user_by('login', $user_number);
-    }
-
-    if ($user == false) {
-        echo("Failed login (even with autoprovisioning)");
-        return;
+        if ($user == false) {
+            echo("Failed login (even with autoprovisioning)");
+            return;
+        }
     }
 
     clean_user_cache($user->ID);
