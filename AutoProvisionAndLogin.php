@@ -25,7 +25,7 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 function sso_logout()
 {
-    return 'https://wordpress.openlmshost.com/wp-admin?logout=https%3A%2F%2Fwordpress.openlmshost.com%2Floggedout.html';
+    return CUSTOM_LOGOUT_URL;
 }
 
 function sso_login()
