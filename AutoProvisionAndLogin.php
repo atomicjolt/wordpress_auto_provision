@@ -62,18 +62,21 @@ function sso_login()
             echo("Failed login (even with autoprovisioning)");
             return;
         }
-
-        $path = '/' . $user_number . 'blog';
-        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
-        if (is_wp_error($result)) {
-            echo $result->get_error_message();
-        }
     }
 
     clean_user_cache($user->ID);
     wp_clear_auth_cookie();
     wp_set_current_user($user->ID);
     wp_set_auth_cookie($user->ID);
+
+    $user_info = get_userdata($user->ID);
+    if (!$user_info->primary_blog) {
+        $path = '/' . $user_number . 'blog';
+        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
+        if (is_wp_error($result)) {
+            echo $result->get_error_message();
+        }
+    }
 
     // Redirect URL
     $user_info = get_userdata($user->ID);
