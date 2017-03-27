@@ -56,12 +56,12 @@ function sso_login()
         // User hasn't been created yet, auto provision one
         $password = wp_generate_password(12, true);
         $user_id = wpmu_create_user($user_number, $password, $email_address);
-
-        $user = get_user_by('login', $user_number);
-        if ($user == false) {
+        if ($user_id == false) {
             echo("Failed login (even with autoprovisioning)");
             return;
         }
+
+        $user = get_user_by('login', $user_number);
     }
 
     clean_user_cache($user->ID);
