@@ -64,7 +64,7 @@ function sso_login()
         }
 
         $path = '/' . $user_number . 'blog';
-        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user_id, array('public' => 1), 1);
+        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
         if (is_wp_error($result)) {
             echo $result->get_error_message();
         }
