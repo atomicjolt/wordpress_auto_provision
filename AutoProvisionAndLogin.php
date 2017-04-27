@@ -1,6 +1,6 @@
 <?php
 /**
-Plugin Name: Autoprovision and login wordpress plugin
+Plugin Name: SSO Account Integration
 
 Copyright (C) 2017 Atomic Jolt
 
@@ -25,9 +25,7 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 function sso_logout()
 {
-    $url = 'https://wordpress.openlmshost.com/wp-admin?logout=https%3A%2F%2Fwordpress.openlmshost.com%2Floggedout.html';
-    wp_clear_auth_cookie();
-    wp_redirect($url);
+    wp_redirect(SSO_LOGOUT_URL);
     exit;
 }
 
@@ -67,20 +65,11 @@ function sso_login()
     wp_set_auth_cookie($user->ID);
 
     if (!$user->primary_blog) {
-        $path = '/' . $user_number . 'blog';
-        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'Title', $user->ID, array('public' => 1), 1);
+        $path = "/$user_number";
+        $result = wpmu_create_blog(DOMAIN_CURRENT_SITE, $path, 'My blog', $user->ID, array('public' => 1), 1);
         if (is_wp_error($result)) {
             $msg = $result->get_error_message();
             wp_die("Failed to create new blog at $path for user $user_number: $msg");
-        }
-    }
-
-    // Redirect URL
-    if ($user->primary_blog) {
-        $primary_url = get_blogaddress_by_id($user->primary_blog) . 'wp-admin/';
-        if ($primary_url) {
-            wp_redirect($primary_url);
-            exit;
         }
     }
 }
