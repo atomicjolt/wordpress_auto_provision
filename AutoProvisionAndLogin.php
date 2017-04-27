@@ -25,8 +25,7 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 function sso_logout()
 {
-    $url = 'https://wordpress.openlmshost.com/wp-admin?logout=https%3A%2F%2Fwordpress.openlmshost.com%2Floggedout.html';
-    wp_redirect($url);
+    wp_redirect(SSO_LOGOUT_URL);
     exit;
 }
 
