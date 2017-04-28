@@ -35,7 +35,7 @@ function sso_login()
         return;
     }
 
-    /*
+    //*
     $email_address = explode("/", $_SERVER['REMOTE_USER'])[0];
     $user_number = explode("@", $email_address)[0];
     /*/
